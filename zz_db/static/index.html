@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>OperatorIQ</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark"></span>
+        <div>
+          <strong>OperatorIQ</strong>
+          <small>Business insights</small>
+        </div>
+      </div>
+      <nav>
+        <a class="active" href="#">Overview</a>
+        <a href="#ask">Ask AI</a>
+        <a href="#data">Data</a>
+      </nav>
+      <div class="model-panel">
+        <span>Ollama model</span>
+        <code id="modelName">hf.co/rahul042/gemma_3_finetune:Q8_0</code>
+        <button id="pullModel" type="button">Pull model</button>
+        <p id="modelStatus">Checking model status...</p>
+      </div>
+    </aside>
+
+    <main>
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">May 2026</p>
+          <h1>Business manager insights</h1>
+        </div>
+        <div class="status-chip">SQLite live</div>
+      </header>
+
+      <section class="metrics" aria-label="Key metrics">
+        <article>
+          <span>Total MRR</span>
+          <strong id="totalMrr">-</strong>
+        </article>
+        <article>
+          <span>Average store MRR</span>
+          <strong id="avgMrr">-</strong>
+        </article>
+        <article>
+          <span>Stores under $25k</span>
+          <strong id="under25">-</strong>
+        </article>
+        <article>
+          <span>Average NPS</span>
+          <strong id="avgNps">-</strong>
+        </article>
+      </section>
+
+      <section class="grid">
+        <article class="panel span-7">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Revenue</p>
+              <h2>MRR by region</h2>
+            </div>
+          </div>
+          <div id="regionBars" class="bars"></div>
+        </article>
+        <article class="panel span-5">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Risk</p>
+              <h2>Store risk mix</h2>
+            </div>
+          </div>
+          <div id="riskList" class="risk-list"></div>
+        </article>
+      </section>
+
+      <section id="ask" class="ask-layout">
+        <article class="panel ask-panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Ask AI</p>
+              <h2>Ask a business question</h2>
+            </div>
+          </div>
+          <textarea id="question" rows="4">How many stores are making less than 25000 MRR?</textarea>
+          <div class="actions">
+            <button id="runQuery" type="button">Run insight</button>
+            <button class="secondary" data-question="Which region has the highest total MRR?" type="button">Top region</button>
+            <button class="secondary" data-question="Show the highest gross margin transactions with store and product names." type="button">Best margin</button>
+          </div>
+          <div id="answer" class="answer hidden">
+            <p id="summary"></p>
+            <details>
+              <summary>Generated Query</summary>
+              <pre id="sqlBlock"></pre>
+            </details>
+            <div class="table-wrap">
+              <table id="resultTable"></table>
+            </div>
+          </div>
+          <p id="queryError" class="error hidden"></p>
+        </article>
+
+        <article class="panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Products</p>
+              <h2>Closed-won revenue</h2>
+            </div>
+          </div>
+          <div id="categoryBars" class="bars compact"></div>
+        </article>
+      </section>
+
+      <section id="data" class="panel data-panel">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Database</p>
+            <h2>Sample rows</h2>
+          </div>
+          <span class="status-chip">4 tables x 125 rows</span>
+        </div>
+        <div class="data-grid">
+          <div>
+            <h3>Stores</h3>
+            <div class="table-wrap">
+              <table id="storesTable"></table>
+            </div>
+          </div>
+          <div>
+            <h3>Transactions</h3>
+            <div class="table-wrap">
+              <table id="transactionsTable"></table>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
